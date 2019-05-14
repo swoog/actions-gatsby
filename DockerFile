@@ -1,0 +1,17 @@
+FROM microsoft/azure-cli
+
+LABEL version="1.0.0"
+
+LABEL maintainer="Aurelien" 
+LABEL com.github.actions.name="Build actions" 
+LABEL com.github.actions.description="Build actions" 
+LABEL com.github.actions.color="blue"  
+
+RUN apk update && apk add nodejs=8.9.3-r1 && apk add zip
+
+RUN npm install -g gatsby-cli
+
+COPY entrypoint.sh /entrypoint.sh  
+RUN chmod +x /entrypoint.sh 
+
+ENTRYPOINT ["/entrypoint.sh"]
